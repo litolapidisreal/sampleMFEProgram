@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RedeemForm {
+public class RedeemFund {
     private String modeOfRedemption;
     private Double amount;
     private String from;
+    private Boolean isRedeemForSpecificAppNo;
     private String redemptionOptions;
     private String reasonOfRedemption;
     private Boolean isAgree;

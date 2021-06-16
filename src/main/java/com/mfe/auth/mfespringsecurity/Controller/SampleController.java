@@ -88,9 +88,9 @@ public class SampleController {
     }
 
     @PostMapping("/redeemFund")
-    public ResponseEntity<?> redeemFund(@RequestBody RedeemForm redeemForm,
+    public ResponseEntity<?> redeemFund(@RequestBody RedeemFund redeemFund,
                                         @RequestHeader("token") String token) {
-        return ResponseEntity.ok(redeemForm);
+        return ResponseEntity.ok(redeemFund);
 
     }
 }
