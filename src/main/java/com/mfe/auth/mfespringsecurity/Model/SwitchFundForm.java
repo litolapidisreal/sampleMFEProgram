@@ -15,6 +15,6 @@ public class SwitchFundForm {
     private String depositFrom;
     private Boolean isTransferForSpecificAppNo;
     private String depositTo;
-    private Long totalAmount;
+    private String totalAmount;
     private Boolean termsAgreement;
 }
