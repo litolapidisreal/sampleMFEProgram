@@ -1,9 +1,6 @@
 package com.mfe.auth.mfespringsecurity.Controller;
 
-import com.mfe.auth.mfespringsecurity.Model.Address;
-import com.mfe.auth.mfespringsecurity.Model.AuthenticationRequest;
-import com.mfe.auth.mfespringsecurity.Model.AuthenticationResponse;
-import com.mfe.auth.mfespringsecurity.Model.Users;
+import com.mfe.auth.mfespringsecurity.Model.*;
 import com.mfe.auth.mfespringsecurity.Services.MyUserDetailService;
 import com.mfe.auth.mfespringsecurity.Utility.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +74,11 @@ public class SampleController {
     public ResponseEntity<?> changeAddress(@RequestBody Address address, @RequestHeader("token") String token)
             throws Exception {
         return ResponseEntity.ok(address);
+    }
+
+    @PostMapping("/redeemFund")
+    public ResponseEntity<?> redeemFund(@RequestBody RedeemForm redeemForm,
+                                        @RequestHeader("token") String token) {
+        return ResponseEntity.ok(redeemForm);
     }
 }
