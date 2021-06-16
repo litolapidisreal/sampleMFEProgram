@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RedeemFund {
     private String modeOfRedemption;
-    private Double amount;
+    private String amount;
     private String from;
     private Boolean isRedeemForSpecificAppNo;
     private String redemptionOptions;
