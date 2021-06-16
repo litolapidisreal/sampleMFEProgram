@@ -50,7 +50,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/changeAddress", "/token").permitAll()
+                .antMatchers("/authenticate", "/changeAddress", "/token", "/redeemFund").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
