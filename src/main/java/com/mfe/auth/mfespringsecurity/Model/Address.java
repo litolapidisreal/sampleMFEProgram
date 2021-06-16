@@ -10,7 +10,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Address implements Serializable {
-
     private Long id;
     private String street;
     private String subdivision;

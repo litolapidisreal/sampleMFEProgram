@@ -1,9 +1,6 @@
 package com.mfe.auth.mfespringsecurity.Controller;
 
-import com.mfe.auth.mfespringsecurity.Model.Address;
-import com.mfe.auth.mfespringsecurity.Model.AuthenticationRequest;
-import com.mfe.auth.mfespringsecurity.Model.AuthenticationResponse;
-import com.mfe.auth.mfespringsecurity.Model.Users;
+import com.mfe.auth.mfespringsecurity.Model.*;
 import com.mfe.auth.mfespringsecurity.Services.MyUserDetailService;
 import com.mfe.auth.mfespringsecurity.Utility.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +40,6 @@ public class SampleController {
         users.add(new Users("userOne","sample@gmail.com"));
         users.add(new Users("userTwo","sample@gmail.com"));
         users.add(new Users("userThree","sample@gmail.com"));
-
         return ResponseEntity.ok(users);
     }
 
@@ -77,5 +73,17 @@ public class SampleController {
     public ResponseEntity<?> changeAddress(@RequestBody Address address, @RequestHeader("token") String token)
             throws Exception {
         return ResponseEntity.ok(address);
+    }
+
+    @PostMapping("/addFund")
+    public ResponseEntity<?> addFund(@RequestBody AddForm addForm, @RequestHeader("token") String token)
+            throws Exception {
+        return ResponseEntity.ok(addForm);
+    }
+
+    @PostMapping("/switchFund")
+    public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm, @RequestHeader("token") String token)
+            throws Exception {
+        return ResponseEntity.ok(switchFundForm);
     }
 }
