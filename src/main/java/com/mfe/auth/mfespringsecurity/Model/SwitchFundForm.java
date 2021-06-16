@@ -1,6 +1,5 @@
 package com.mfe.auth.mfespringsecurity.Model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,14 +7,12 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class AddForm {
-    private String bankName;
+public class SwitchFundForm {
+    private String modeOfTransfer;
     private String depositAmount;
-    private Date dateOfDeposit;
-    private String fundType;
-    private Long salesLoad;
-    private Long investmentAmount;
-    private Long sourceOfFunds;
+    private String depositFrom;
+    private Boolean isTransferForSpecificAppNo;
+    private String depositTo;
+    private Long totalAmount;
     private Boolean termsAgreement;
-
 }
