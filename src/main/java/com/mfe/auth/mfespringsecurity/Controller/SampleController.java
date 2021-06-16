@@ -40,7 +40,6 @@ public class SampleController {
         users.add(new Users("userOne","sample@gmail.com"));
         users.add(new Users("userTwo","sample@gmail.com"));
         users.add(new Users("userThree","sample@gmail.com"));
-
         return ResponseEntity.ok(users);
     }
 
@@ -76,9 +75,21 @@ public class SampleController {
         return ResponseEntity.ok(address);
     }
 
+    @PostMapping("/addFund")
+    public ResponseEntity<?> addFund(@RequestBody AddForm addForm, @RequestHeader("token") String token)
+            throws Exception {
+        return ResponseEntity.ok(addForm);
+    }
+
+    @PostMapping("/switchFund")
+    public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm, @RequestHeader("token") String token)
+            throws Exception {
+        return ResponseEntity.ok(switchFundForm);
+
     @PostMapping("/redeemFund")
     public ResponseEntity<?> redeemFund(@RequestBody RedeemForm redeemForm,
                                         @RequestHeader("token") String token) {
         return ResponseEntity.ok(redeemForm);
+
     }
 }
