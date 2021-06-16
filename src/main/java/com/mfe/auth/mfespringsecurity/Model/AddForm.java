@@ -1,13 +1,14 @@
 package com.mfe.auth.mfespringsecurity.Model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class AddForm {
     private String bankName;
     private String depositAmount;

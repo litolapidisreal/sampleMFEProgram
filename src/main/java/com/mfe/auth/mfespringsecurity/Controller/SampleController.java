@@ -85,6 +85,7 @@ public class SampleController {
     public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm, @RequestHeader("token") String token)
             throws Exception {
         return ResponseEntity.ok(switchFundForm);
+    }
 
     @PostMapping("/redeemFund")
     public ResponseEntity<?> redeemFund(@RequestBody RedeemForm redeemForm,
