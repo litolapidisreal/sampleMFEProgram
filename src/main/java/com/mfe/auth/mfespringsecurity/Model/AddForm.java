@@ -14,9 +14,9 @@ public class AddForm {
     private String depositAmount;
     private Date dateOfDeposit;
     private String fundType;
-    private Long salesLoad;
-    private Long investmentAmount;
-    private Long sourceOfFunds;
+    private String salesLoad;
+    private String investmentAmount;
+    private String sourceOfFunds;
     private Boolean termsAgreement;
 
 }
