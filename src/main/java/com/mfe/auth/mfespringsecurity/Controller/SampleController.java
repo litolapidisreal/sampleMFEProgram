@@ -3,6 +3,7 @@ package com.mfe.auth.mfespringsecurity.Controller;
 import com.mfe.auth.mfespringsecurity.Model.*;
 import com.mfe.auth.mfespringsecurity.Services.MyUserDetailService;
 import com.mfe.auth.mfespringsecurity.Utility.JwtUtil;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,8 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 import static com.mfe.auth.mfespringsecurity.Services.RandomString.getAlphaNumericString;
 
@@ -54,11 +55,27 @@ public class SampleController {
            throw new Exception("Incorrect username or password", exception);
        }
 
-       final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
+       final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
        final String jwt = jwtUtil.generateToken(userDetails);
        return ResponseEntity.ok(new AuthenticationResponse(jwt));
 
+    }
+
+    @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
+    public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {
+        DefaultClaims claims = (io.jsonwebtoken.impl.DefaultClaims) request.getAttribute("claims");
+        Map<String, Object> expectedMap = getMapFromIoJsonWebTokenClaims(claims);
+        String token = jwtUtil.createToken(expectedMap, expectedMap.get("sub").toString());
+        return ResponseEntity.ok(new AuthenticationResponse(token));
+    }
+
+    public Map<String, Object> getMapFromIoJsonWebTokenClaims(DefaultClaims claims) {
+        Map<String, Object> expectedMap = new HashMap<String, Object>();
+        for (Map.Entry<String, Object> entry : claims.entrySet()) {
+            expectedMap.put(entry.getKey(), entry.getValue());
+        }
+        return expectedMap;
     }
 
     @GetMapping("/token")
@@ -67,7 +84,6 @@ public class SampleController {
 
         return ResponseEntity.ok(getAlphaNumericString(30));
     }
-
 
     @PostMapping("/changeAddress")
     public ResponseEntity<?> changeAddress(@RequestBody Address address, @RequestHeader("token") String token)
