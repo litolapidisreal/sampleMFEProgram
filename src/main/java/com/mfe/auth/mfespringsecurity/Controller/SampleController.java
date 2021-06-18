@@ -82,8 +82,10 @@ public class SampleController {
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken()
             throws Exception {
-
-        return ResponseEntity.ok("This is valid Token");
+        return ResponseEntity.ok(new HashMap<Integer, String>()
+        {{
+            put(200, "This is valid Token");
+        }});
     }
 
     @PostMapping("/changeAddress")
