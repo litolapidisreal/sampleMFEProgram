@@ -46,22 +46,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 UserDetails userDetails = this.userDetailService.loadUserByUsername(username);
                 if (jwtUtil.validateToken(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new
-                            UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-
+                            UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource()
                             .buildDetails(httpServletRequest));
-
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
+
         } catch (ExpiredJwtException expiredJwtException) {
             String isRefreshToken = httpServletRequest.getHeader("isRefreshToken");
             String requestURL = httpServletRequest.getRequestURL().toString();
             if (isRefreshToken != null && isRefreshToken.equals("true") && requestURL.contains("refreshToken")) {
                 allowForRefreshToken(expiredJwtException, httpServletRequest);
-            } else
+            } else {
                 httpServletRequest.setAttribute("exception", expiredJwtException);
-        }catch(BadCredentialsException ex) {
+            }
+        } catch(BadCredentialsException ex) {
             httpServletRequest.setAttribute("exception", ex);
         }
 
