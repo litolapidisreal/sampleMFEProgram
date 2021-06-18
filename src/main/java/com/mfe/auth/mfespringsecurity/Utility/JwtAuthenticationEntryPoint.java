@@ -1,6 +1,7 @@
 package com.mfe.auth.mfespringsecurity.Utility;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mfe.auth.mfespringsecurity.Model.APIResponse;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -21,29 +22,19 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-
 		Exception exception = (Exception) request.getAttribute("exception");
 
-		String message;
+		String message = "";
 
 		if (exception != null) {
-
-			byte[] body = new ObjectMapper().writeValueAsBytes(Collections.singletonMap("cause", exception.toString()));
-
-			response.getOutputStream().write(body);
-
+			message = exception.toString();
+		} else if (authException.getCause() != null) {
+		    message = authException.getCause().toString() + " " + authException.getMessage();
 		} else {
-
-			if (authException.getCause() != null) {
-				message = authException.getCause().toString() + " " + authException.getMessage();
-			} else {
-				message = authException.getMessage();
-			}
-
-			byte[] body = new ObjectMapper().writeValueAsBytes(Collections.singletonMap("error", message));
-
-			response.getOutputStream().write(body);
+			message = authException.getMessage();
 		}
-	}
+        response.getOutputStream().write(new ObjectMapper().writeValueAsBytes(new APIResponse(message, "401")));
+
+    }
 
 }
