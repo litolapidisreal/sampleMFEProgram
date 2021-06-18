@@ -87,26 +87,25 @@ public class SampleController {
     }
 
     @PostMapping("/changeAddress")
-    public ResponseEntity<?> changeAddress(@RequestBody Address address, @RequestHeader("token") String token)
+    public ResponseEntity<?> changeAddress(@RequestBody Address address)
             throws Exception {
         return ResponseEntity.ok(address);
     }
 
     @PostMapping("/addFund")
-    public ResponseEntity<?> addFund(@RequestBody AddForm addForm, @RequestHeader("token") String token)
+    public ResponseEntity<?> addFund(@RequestBody AddForm addForm)
             throws Exception {
         return ResponseEntity.ok(addForm);
     }
 
     @PostMapping("/switchFund")
-    public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm, @RequestHeader("token") String token)
+    public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm)
             throws Exception {
         return ResponseEntity.ok(switchFundForm);
     }
 
     @PostMapping("/redeemFund")
-    public ResponseEntity<?> redeemFund(@RequestBody RedeemFund redeemFund,
-                                        @RequestHeader("token") String token) {
+    public ResponseEntity<?> redeemFund(@RequestBody RedeemFund redeemFund) {
         return ResponseEntity.ok(redeemFund);
 
     }
