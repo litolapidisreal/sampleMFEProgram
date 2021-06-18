@@ -5,7 +5,6 @@ import com.mfe.auth.mfespringsecurity.Services.MyUserDetailService;
 import com.mfe.auth.mfespringsecurity.Utility.JwtUtil;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-
-import static com.mfe.auth.mfespringsecurity.Services.RandomString.getAlphaNumericString;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -82,10 +79,8 @@ public class SampleController {
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken()
             throws Exception {
-        return ResponseEntity.ok(new HashMap<Integer, String>()
-        {{
-            put(200, "This is valid Token");
-        }});
+        return ResponseEntity.ok(
+                new APIResponse("This is valid Token", "200"));
     }
 
     @PostMapping("/changeAddress")
