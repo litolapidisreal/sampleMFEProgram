@@ -5,6 +5,7 @@ import com.mfe.auth.mfespringsecurity.Services.MyUserDetailService;
 import com.mfe.auth.mfespringsecurity.Utility.JwtUtil;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -55,7 +56,6 @@ public class SampleController {
            throw new Exception("Incorrect username or password", exception);
        }
 
-
        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
        final String jwt = jwtUtil.generateToken(userDetails);
        return ResponseEntity.ok(new AuthenticationResponse(jwt));
@@ -78,34 +78,34 @@ public class SampleController {
         return expectedMap;
     }
 
-    @GetMapping("/token")
-    public ResponseEntity<?> getToken()
+
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateToken()
             throws Exception {
 
-        return ResponseEntity.ok(getAlphaNumericString(30));
+        return ResponseEntity.ok("This is valid Token");
     }
 
     @PostMapping("/changeAddress")
-    public ResponseEntity<?> changeAddress(@RequestBody Address address, @RequestHeader("token") String token)
+    public ResponseEntity<?> changeAddress(@RequestBody Address address)
             throws Exception {
         return ResponseEntity.ok(address);
     }
 
     @PostMapping("/addFund")
-    public ResponseEntity<?> addFund(@RequestBody AddForm addForm, @RequestHeader("token") String token)
+    public ResponseEntity<?> addFund(@RequestBody AddForm addForm)
             throws Exception {
         return ResponseEntity.ok(addForm);
     }
 
     @PostMapping("/switchFund")
-    public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm, @RequestHeader("token") String token)
+    public ResponseEntity<?> switchFund(@RequestBody SwitchFundForm switchFundForm)
             throws Exception {
         return ResponseEntity.ok(switchFundForm);
     }
 
     @PostMapping("/redeemFund")
-    public ResponseEntity<?> redeemFund(@RequestBody RedeemFund redeemFund,
-                                        @RequestHeader("token") String token) {
+    public ResponseEntity<?> redeemFund(@RequestBody RedeemFund redeemFund) {
         return ResponseEntity.ok(redeemFund);
 
     }
