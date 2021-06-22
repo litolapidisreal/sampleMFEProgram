@@ -42,7 +42,7 @@ public class SampleController {
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/token")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
             throws Exception {
        try {
